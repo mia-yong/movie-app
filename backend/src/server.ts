@@ -6,6 +6,7 @@ const PORT = 4000; // Server port: 4000
 
 // 💡 [API 창구 1] 프론트엔드가 'http://localhost:4000/'로 노크하면 반응하는 곳
 app.get('/', (req: Request, res: Response) => {
+  console.log("Jemand ist in die Address reingekommen! 야 되나?");
   res.send('Movie App Backend Server gut funcktiniert! 🚀');
 });
 
