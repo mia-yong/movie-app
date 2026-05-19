@@ -1,4 +1,5 @@
 import Header from './components/Header';
+import TrendingSection from './components/TrendingSection';
 
 export default function App() {
   const handleSearch = (keyword: string) => {
@@ -10,6 +11,11 @@ export default function App() {
       
       {/* Searchbar einfügen */}
       <Header onSearch={handleSearch} />
+
+      {/* Trending 10 Section */}
+      <main>
+        <TrendingSection />
+      </main>
       
     </div>
   );
