@@ -22,7 +22,7 @@ app.get('/', async (req: Request, res: Response) => {
         Authorization: TMDB_TOKEN // 스마트 카드키 가방에 넣어서 보냄
       },
       params: {
-        language: 'ko-KR' // ⭐ 한국어 제목과 줄거리로 받아오는 마법의 옵션!
+        language: 'de-DE' // auf deutsch
       }
     });
 
@@ -42,8 +42,6 @@ app.get('/', async (req: Request, res: Response) => {
       message: 'TMDB 서버 통신 중 에러가 발생했습니다.'
     });
   }
-
-  res.send('Movie App Backend Server gut funcktiniert! 🚀'); // response 끝!
 
 });
 
