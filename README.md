@@ -12,6 +12,6 @@ Und gleichzeitig dasselbe im `frontend`-Ordner:
 npm run dev
 ```
 
-### Bauen der App für im Release-Modus
+### Bauen der App im Release-Modus
 
 TODO
