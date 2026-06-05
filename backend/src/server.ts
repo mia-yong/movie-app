@@ -45,6 +45,16 @@ app.get('/', async (req: Request, res: Response) => {
 
 });
 
+app.get("/film/:id/reviews", async (req: Request, res: Response) => {
+  const response = await axios.get(`https://api.themoviedb.org/3/movie/${req.params.id}/reviews`, {
+    headers: {
+      accept: 'application/json',
+      Authorization: TMDB_TOKEN
+    }
+  });
+  return res.json(response.data.results);
+});
+
 // 💡 [API 창구 2] 나중에 진짜 10개 영화 데이터를 던져줄 가상의 창구
 app.get('/api/welcome', (req: Request, res: Response) => {
   res.json({

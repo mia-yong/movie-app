@@ -1,5 +1,7 @@
 import Header from './components/Header';
 import TrendingSection from './components/TrendingSection';
+import Route from "./components/Route";
+import DetailsSection from "./components/DetailsSection";
 
 export default function App() {
   const handleSearch = (keyword: string) => {
@@ -14,7 +16,12 @@ export default function App() {
 
       {/* Trending 10 Section */}
       <main>
-        <TrendingSection />
+        <Route regex="/">
+          <TrendingSection />
+        </Route>
+        <Route regex="/film/\d+">
+          <DetailsSection filmId={parseInt(location.pathname.split("/")[2])} />
+        </Route>
       </main>
       
     </div>
