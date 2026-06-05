@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { fetchBackend } from '../utils';
 
 interface Movie {
   id: number;
@@ -32,20 +33,16 @@ export default function TrendingSection() {
   // 3. 화면이 켜지자마자 4000번 백엔드로 퀵 배달(요청) 보내기!
   useEffect(() => {
     const fetchMovies = async () => {
-      try {
-        // 🚀 핵심: 우리가 만든 백엔드 주소로 빨대를 꽂습니다.
-        const response = await fetch('http://localhost:4000/');
-        const result = await response.json();
+      // 🚀 핵심: 우리가 만든 백엔드 주소로 빨대를 꽂습니다.
+      const response = await fetchBackend<{ data: Movie[] }>({ path: '/' });
 
-        if (result.success) {
-          // 백엔드의 top10Movies 데이터를 리액트 상자에 쏙!
-          setMovies(result.data);
-        }
-      } catch (error) {
-        console.error('백엔드에서 데이터를 떼어오는 데 실패했습니다 ㅠ_ㅠ:', error);
-      } finally {
-        setLoading(false);
+      if (response.success && response.body.success) {
+        // 백엔드의 top10Movies 데이터를 리액트 상자에 쏙!
+        setMovies(response.body.data);
+      } else {
+        // TODO: report failure to user
       }
+      setLoading(false);
     };
 
     fetchMovies();
@@ -73,7 +70,11 @@ export default function TrendingSection() {
         
         {/* 4. 10 DummyDaten repeated anzeigen (map) */}
         {movies.map((movie, index) => (
-          <div key={movie.id} style={{ flex: '0 0 auto', width: '120px', position: 'relative' }}>
+          <a
+            key={movie.id}
+            style={{ flex: '0 0 auto', width: '120px', position: 'relative' }}
+            href={`/film/${movie.id}`}
+          >
             
             {/* 🔢 Ranking Nummer */}
             <span style={{ position: 'absolute', top: '-15px', left: '-10px', fontSize: '4rem', fontWeight: 900, color: '#71717a', zIndex: 2, userSelect: 'none' }}>
@@ -90,7 +91,7 @@ export default function TrendingSection() {
               {movie.title}
             </p>
 
-          </div>
+          </a>
         ))}
       </div>
     </section>
